@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 import jdatetime
 from .utils import get_days_in_month
-from .locale.fa import WEEKDAYS_FA, MONTH_NAMES_FA
+from .locale.fa import MONTH_NAMES_FA
 
 
 class ModernShamsiDateEntry(ttk.Frame):
@@ -304,7 +304,6 @@ class ModernShamsiDateEntry(ttk.Frame):
     def get(self):
         """برگرداندن تاریخ انتخاب‌شده"""
         return self.selected_date
-
 
 # نگه داشتن کلاس قدیمی برای سازگاری
 class ShamsiDateEntry(ModernShamsiDateEntry):
