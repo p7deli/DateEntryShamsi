@@ -108,18 +108,13 @@ class ModernShamsiDateEntry(ttk.Frame):
         
         self.calendar_window = tk.Toplevel(self)
         self.calendar_window.title("تقویم شمسی")
-        self.calendar_window.geometry("400x500")
         self.calendar_window.resizable(False, False)
         self.calendar_window.configure(bg='#f8f9fa')
         
-        # مرکز قرار دادن پنجره
-        self.calendar_window.transient(self)
-        self.calendar_window.grab_set()
-        
         # تنظیم موقعیت پنجره
-        x = self.winfo_rootx() + self.winfo_width() // 2 - 200
-        y = self.winfo_rooty() + self.winfo_height() // 2 - 250
-        self.calendar_window.geometry(f"+{x}+{y}")
+        x = (self.winfo_screenwidth() // 2) - (400 // 2)
+        y = ((self.winfo_screenheight() // 2) - (500 // 2)) - 20
+        self.calendar_window.geometry(f"400x500+{x}+{y}")
         
         self.current_year = self.selected_date.year
         self.current_month = self.selected_date.month
@@ -144,7 +139,7 @@ class ModernShamsiDateEntry(ttk.Frame):
         
         # نمایش ماه و سال
         self.header_label = tk.Label(header_frame, text="", 
-                                   font=('Arial', 14, 'bold'), 
+                                   font=('Titr', 15, 'bold'), 
                                    bg='#f8f9fa', fg='#333333')
         self.header_label.pack(side='left', expand=True)
         
@@ -156,13 +151,13 @@ class ModernShamsiDateEntry(ttk.Frame):
         year_frame = ttk.Frame(main_frame, style='Modern.TFrame')
         year_frame.pack(fill='x', pady=(0, 10))
         
-        tk.Label(year_frame, text="سال:", font=('Arial', 10), 
+        tk.Label(year_frame, text="(سال)", font=('Titr', 10), 
                 bg='#f9f9fa', fg='#333333').pack(side='left')
         
         self.year_var = tk.StringVar(value=str(self.current_year))
         year_spinbox = tk.Spinbox(year_frame, from_=1300, to=1500, 
                                  textvariable=self.year_var, width=8,
-                                 font=('Arial', 10), command=self.on_year_change)
+                                 font=('Arial', 10, 'bold'), command=self.on_year_change)
         year_spinbox.pack(side='left', padx=(5, 0))
         
         # فریم روزهای هفته
@@ -173,9 +168,9 @@ class ModernShamsiDateEntry(ttk.Frame):
         weekday_names = ['شنبه', 'یکشنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنج‌شنبه', 'جمعه']
         for i, day_name in enumerate(weekday_names):
             label = tk.Label(weekdays_frame, text=day_name, 
-                           font=('Arial', 10, 'bold'),
+                           font=('Titr', 8, 'bold'),
                            bg='#e9ecef', fg='#495057',
-                           width=8, height=2)
+                           width=5, height=2)
             label.grid(row=0, column=i, padx=1, pady=1, sticky='nsew')
         
         # تنظیم وزن ستون‌ها
@@ -256,7 +251,7 @@ class ModernShamsiDateEntry(ttk.Frame):
         for day in range(1, days_in_month + 1):
             btn = tk.Button(self.days_frame, text=str(day), 
                            font=('Arial', 10),
-                           width=8, height=2,
+                           width=5, height=2,
                            command=lambda d=day: self.select_date(d))
             
             # تنظیم رنگ دکمه
